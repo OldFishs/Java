@@ -1,11 +1,13 @@
 package com.xxx.jdbc;
 
+import jdk.jfr.Timestamp;
+
 import java.util.Date;
 
 /**
  * Actor 对象和 actor表的记录对应
  */
-public class Actor { //Javabean, POJO, Domain对象
+public class actor { //Javabean, POJO, Domain对象
 
     private Integer id;
     private String name;
@@ -13,10 +15,10 @@ public class Actor { //Javabean, POJO, Domain对象
     private Date borndate;
     private String phone;
 
-    public Actor() { //一定要给一个无参构造器[反射需要]
+    public actor() { //一定要给一个无参构造器[反射需要]
     }
 
-    public Actor(Integer id, String name, String sex, Date borndate, String phone) {
+    public actor(Integer id, String name, String sex, Date borndate, String phone) {
         this.id = id;
         this.name = name;
         this.sex = sex;
@@ -49,11 +51,11 @@ public class Actor { //Javabean, POJO, Domain对象
     }
 
     public Date getBorndate() {
-        return borndate;
+        return (Date) borndate;
     }
 
     public void setBorndate(Date borndate) {
-        this.borndate = borndate;
+        this.borndate =  borndate;
     }
 
     public String getPhone() {

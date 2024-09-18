@@ -1,7 +1,9 @@
 package com.xxx.jdbc.datasource;
 
-import com.xxx.jdbc.Actor;
+import com.xxx.jdbc.actor;
+import com.xxx.jdbc.actor;
 import com.xxx.jdbc.utils.jdbcutils;
+import jdk.jfr.Timestamp;
 import org.junit.Test;
 import org.junit.jupiter.api.TestFactory;
 import org.junit.platform.commons.annotation.Testable;
@@ -21,7 +23,7 @@ public class JDBCutilbydruid_use {
         ResultSet resultSet = null;
         //创建preparedStatement
         try {
-            connection = jdbcutils.getConnection();
+            connection = JDBCutilnydruid.getDataSource();
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, 1);
 
@@ -39,13 +41,13 @@ public class JDBCutilbydruid_use {
             throw new RuntimeException(e);
         }finally {
             //关闭资源
-            JDBCutilnydruid.close(connection,preparedStatement,null);
+            JDBCutilnydruid.close(connection,preparedStatement,resultSet);
         }
     }
 
     //土方法解决封装
     @Test
-    public ArrayList<Actor> testlecttoarraylist(){
+    public void testlecttoarraylist(){
         //得到连接
         Connection connection = null;
 
@@ -53,10 +55,10 @@ public class JDBCutilbydruid_use {
         String sql = "select * from actor where id >= ?";
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        ArrayList<Actor> list = new ArrayList();
+        ArrayList<actor> list = new ArrayList();
         //创建preparedStatement
         try {
-            connection = jdbcutils.getConnection();
+            connection = JDBCutilnydruid.getDataSource();
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, 1);
 
@@ -69,12 +71,11 @@ public class JDBCutilbydruid_use {
                 Date borndate = resultSet.getDate("borndate");
                 String phone = resultSet.getString("phone");
                 //把得到的记录封装到actor对象放入list集合
-                list.add(new Actor(id,name,sex,borndate,phone));
+                list.add(new actor(id,name,sex,borndate,phone));
 
 
             }
-            System.out.println(list);
-            for(Actor actor : list){
+            for(actor actor : list){
                 System.out.println(actor);
             }
 
@@ -85,7 +86,6 @@ public class JDBCutilbydruid_use {
             //关闭资源
             JDBCutilnydruid.close(connection,preparedStatement,resultSet);
         }
-        return list;
 
     }
 }
